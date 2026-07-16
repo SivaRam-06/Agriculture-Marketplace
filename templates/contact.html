@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Contact | AgriMarket{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <div class="row g-4">
+    <div class="col-lg-6">
+      <div class="card p-4">
+        <h2 class="fw-bold mb-3">Contact Us</h2>
+        <form method="post">
+          {{ form.hidden_tag() }}
+          <div class="mb-3">{{ form.name.label(class='form-label') }}{{ form.name(class='form-control') }}</div>
+          <div class="mb-3">{{ form.email.label(class='form-label') }}{{ form.email(class='form-control') }}</div>
+          <div class="mb-3">{{ form.subject.label(class='form-label') }}{{ form.subject(class='form-control') }}</div>
+          <div class="mb-3">{{ form.message.label(class='form-label') }}{{ form.message(class='form-control', rows=4) }}</div>
+          <button class="btn btn-success">{{ form.submit.label.text }}</button>
+        </form>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card p-4">
+        <h4 class="fw-bold">Support Center</h4>
+        <p><i class="fa-solid fa-envelope me-2"></i>support@agrimarket.com</p>
+        <p><i class="fa-solid fa-phone me-2"></i>+91 98765 43210</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
