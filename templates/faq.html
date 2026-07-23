@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}FAQ | AgriMarket{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <div class="card p-5">
+    <h2 class="fw-bold mb-3">Frequently Asked Questions</h2>
+    <div class="accordion" id="faqAccordion">
+      <div class="accordion-item">
+        <h2 class="accordion-header"><button class="accordion-button" data-bs-toggle="collapse" data-bs-target="#faq1">How do I register as a farmer?</button></h2>
+        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion"><div class="accordion-body">Create an account and choose the farmer role during registration.</div></div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header"><button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#faq2">Can I compare prices?</button></h2>
+        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"><div class="accordion-body">Yes, explore the marketplace and review crop details from multiple farmers.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
