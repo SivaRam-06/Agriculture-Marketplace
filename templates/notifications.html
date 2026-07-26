@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Notifications | AgriMarket{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <h2 class="fw-bold mb-4">Notifications</h2>
+  {% if notes %}
+    {% for note in notes %}
+    <div class="card p-3 mb-3">
+      <h5>{{ note.title }}</h5>
+      <p class="mb-0">{{ note.message }}</p>
+    </div>
+    {% endfor %}
+  {% else %}
+    <p class="text-muted">No notifications yet.</p>
+  {% endif %}
+</div>
+{% endblock %}
