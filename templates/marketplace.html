@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}Marketplace | AgriMarket{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <div class="row g-4">
+    <div class="col-lg-3">
+      <div class="card p-4">
+        <h4 class="fw-bold mb-3">Filters</h4>
+        <form method="get">
+          <div class="mb-3">
+            <label class="form-label">Search</label>
+            <input type="text" class="form-control" name="q" value="{{ query }}">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Category</label>
+            <select class="form-select" name="category">
+              <option value="">All</option>
+              {% for category in categories %}
+              <option value="{{ category.id }}" {% if category_id == category.id %}selected{% endif %}>{{ category.name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" name="organic" value="1" {% if organic_only %}checked{% endif %}>
+            <label class="form-check-label">Organic Only</label>
+          </div>
+          <button class="btn btn-success w-100">Apply</button>
+        </form>
+      </div>
+    </div>
+    <div class="col-lg-9">
+      <div class="row g-4">
+        {% for product in products.items %}
+        <div class="col-md-6 col-xl-4">
+          <div class="card h-100">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <h5 class="card-title">{{ product.name }}</h5>
+                {% if product.organic %}<span class="badge badge-organic">Organic</span>{% endif %}
+              </div>
+              <p class="text-muted small">{{ product.location }}, {{ product.district }}</p>
+              <p class="text-muted">{{ product.description[:100] }}...</p>
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="fw-bold text-success">₹{{ '%.2f'|format(product.final_price) }}</span>
+                <span class="text-muted">Stock: {{ product.quantity }}</span>
+              </div>
+              <a href="{{ url_for('product_detail', slug=product.slug) }}" class="btn btn-success w-100">View Product</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      {% if products.pages > 1 %}
+      <nav class="mt-4">
+        <ul class="pagination justify-content-center">
+          {% for page_num in range(1, products.pages + 1) %}
+          <li class="page-item {% if page_num == products.page %}active{% endif %}"><a class="page-link" href="?page={{ page_num }}&q={{ query }}&category={{ category_id }}&organic={{ organic_only }}">{{ page_num }}</a></li>
+          {% endfor %}
+        </ul>
+      </nav>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
