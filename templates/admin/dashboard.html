@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard | AgriMarket{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <h2 class="fw-bold mb-4">Admin Dashboard</h2>
+  <div class="row g-4 mb-4">
+    <div class="col-md-4"><div class="card p-4"><h6>Users</h6><h3>{{ user_count }}</h3></div></div>
+    <div class="col-md-4"><div class="card p-4"><h6>Farmers</h6><h3>{{ farmer_count }}</h3></div></div>
+    <div class="col-md-4"><div class="card p-4"><h6>Buyers</h6><h3>{{ buyer_count }}</h3></div></div>
+    <div class="col-md-4"><div class="card p-4"><h6>Orders</h6><h3>{{ order_count }}</h3></div></div>
+    <div class="col-md-4"><div class="card p-4"><h6>Revenue</h6><h3>₹{{ '%.2f'|format(revenue) }}</h3></div></div>
+  </div>
+  <div class="card p-4">
+    <h4 class="fw-bold">Latest Registrations</h4>
+    <ul class="list-group list-group-flush">
+      {% for user in latest_users %}
+      <li class="list-group-item">{{ user.name }} ({{ user.role }})</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endblock %}
