@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}Buyer Dashboard | AgriMarket{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <h2 class="fw-bold mb-4">Buyer Dashboard</h2>
+  <div class="row g-4 mb-4">
+    <div class="col-md-4"><div class="card p-4"><h6>Orders</h6><h3>{{ orders|length }}</h3></div></div>
+    <div class="col-md-4"><div class="card p-4"><h6>Wishlist</h6><h3>{{ wishlist_products|length }}</h3></div></div>
+    <div class="col-md-4"><div class="card p-4"><h6>Cart Items</h6><h3>{{ cart_items|length }}</h3></div></div>
+  </div>
+  <div class="card p-4">
+    <h4 class="fw-bold">Recent Orders</h4>
+    {% if orders %}
+      <ul class="list-group list-group-flush">
+        {% for order in orders %}
+        <li class="list-group-item d-flex justify-content-between">
+          <span>#{{ order.order_number }}</span>
+          <span>{{ order.status }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-muted">No orders yet.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
