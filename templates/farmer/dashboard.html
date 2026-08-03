@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Farmer Dashboard | AgriMarket{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <h2 class="fw-bold mb-4">Farmer Dashboard</h2>
+  <div class="row g-4 mb-4">
+    <div class="col-md-3"><div class="card p-4"><h6>Total Crops</h6><h3>{{ total_crops }}</h3></div></div>
+    <div class="col-md-3"><div class="card p-4"><h6>Available Stock</h6><h3>{{ available_stock }}</h3></div></div>
+    <div class="col-md-3"><div class="card p-4"><h6>Completed Orders</h6><h3>{{ completed_orders }}</h3></div></div>
+    <div class="col-md-3"><div class="card p-4"><h6>Revenue</h6><h3>₹{{ '%.2f'|format(revenue) }}</h3></div></div>
+  </div>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="fw-bold">Your Crops</h4>
+    <a href="{{ url_for('new_product') }}" class="btn btn-success">Add Crop</a>
+  </div>
+  <div class="card p-4">
+    <table class="table">
+      <thead><tr><th>Name</th><th>Price</th><th>Quantity</th><th>Status</th><th>Actions</th></tr></thead>
+      <tbody>
+        {% for product in products %}
+        <tr>
+          <td>{{ product.name }}</td>
+          <td>₹{{ '%.2f'|format(product.final_price) }}</td>
+          <td>{{ product.quantity }}</td>
+          <td>{{ product.stock_status }}</td>
+          <td>
+            <a href="{{ url_for('edit_product', product_id=product.id) }}" class="btn btn-sm btn-outline-success">Edit</a>
+            <form method="post" action="{{ url_for('delete_product', product_id=product.id) }}" class="d-inline">
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+              <button class="btn btn-sm btn-outline-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
