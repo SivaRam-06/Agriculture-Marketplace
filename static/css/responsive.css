@@ -1,0 +1,2 @@
+/* Responsive behavior */
+@media (max-width: 768px) { .hero { padding: 80px 0; } }
